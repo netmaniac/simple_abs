@@ -32,6 +32,12 @@ Run the migrations:
 
     rake db:migrate
 
+## Upgrade
+
+If You have installed version w/o metric support, then You have to add to alternatives table metric field:
+
+         t.decimal  "metric",       :default => 0, scale: 2, precision: 10
+
 
 ## Usage
 
