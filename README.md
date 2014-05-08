@@ -93,6 +93,9 @@ irb(main):011:0> pp SimpleAbs::Alternative.where("experiment = 'buy_page'").all
 [#<SimpleAbs::Alternative id: 2, which: "short", participants: 16, conversions: 1, experiment: "buy_page", created_at: "2013-04-16 05:14:13", updated_at: "2013-04-16 13:39:14">,
  #<SimpleAbs::Alternative id: 1, which: "long", participants: 20, conversions: 1, experiment: "buy_page", created_at: "2013-04-16 05:11:12", updated_at: "2013-04-16 14:30:01">]
 ```
+### Warning!
+
+This gem currently does count conversion only once. This is normally expected behaviour, however remember, that once user is converted, then cookie is set marking given experiment as converted. As long this cookie is present no more conversions will be counted, nor metric value added. If You really want count multiple conversions for given session You need to change simple_abs code.
 
 And then you can plug the participants and conversions into a calculator like that found here: 
 
