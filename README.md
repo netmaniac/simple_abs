@@ -73,11 +73,19 @@ Once your user converts you can call "converted!(experiment name)" from a View o
 converted!("buy_page")
 ```
 
-You can also force someone to a specific alternative of your page by using the query paramater "test_value" in your url: 
+In case You need to track not only conversion rate but also some other numeric value associated with this conversion (let's say to track conversion rate for orders, but also order value) use this form:
+
+```ruby
+converted!("buy_page", @order.total)
+```
+
+This will add to accumulative metric associated with this variant order total. Now if You take alternatives for experiment "buy_page" and divide metric through number of conversions You will get average metric value.
+
+You can also force someone to a specific alternative of your page by using the query parameter "test_value" in your url:
 
     http://draftin.com/buy_things?test_value=long
 
-When you get some data you can look at it from a Rails console. 
+When you get some data you can look at it from a Rails console.
 
 ```ruby
 irb(main):011:0> pp SimpleAbs::Alternative.where("experiment = 'buy_page'").all
