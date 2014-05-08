@@ -36,12 +36,13 @@ module SimpleAbs
     return test_value
   end
   
-  def converted!(name)
+  def converted!(name, metric = 0)
   
     if !is_bot?
       test_value = cookies[name]
       if test_value && cookies[name.to_s + "_converted"].blank?
-        find_or_create_by_experiment_and_which_method(name, test_value).increment!(:conversions)
+        alternative = find_or_create_by_experiment_and_which_method(name, test_value)
+        alternative.update_attributes conversions: (alternative.conversions + 1), metric: (alternative.metric + metric)
         cookies.permanent[name.to_s + "_converted"] = true
       end
     end
